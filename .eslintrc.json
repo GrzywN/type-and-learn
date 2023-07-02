@@ -2,8 +2,43 @@
   "extends": ["plugin:@nx/react"],
   "root": true,
   "ignorePatterns": ["!**/*"],
-  "plugins": ["@nx"],
+  "plugins": ["@nx", "ordered-imports"],
   "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
+            ]
+          }
+        ],
+        "ordered-imports/ordered-imports": [
+          "error",
+          {
+            "group-ordering": [
+              {
+                "name": "relative dir",
+                "match": "^[.].*",
+                "order": 2
+              },
+              {
+                "name": "node_modules",
+                "match": ".*",
+                "order": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nx/typescript"],
