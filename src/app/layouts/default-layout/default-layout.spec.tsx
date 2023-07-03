@@ -1,8 +1,9 @@
 import { render } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 
-import App from './app';
+import { DefaultLayout } from './default-layout';
 
-describe('App', () => {
+describe('DefaultLayout', () => {
   beforeAll(() => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
@@ -20,7 +21,11 @@ describe('App', () => {
   });
 
   it('should render successfully', () => {
-    const { baseElement } = render(<App />);
+    const { baseElement } = render(
+      <BrowserRouter>
+        <DefaultLayout>Children</DefaultLayout>
+      </BrowserRouter>
+    );
     expect(baseElement).toBeTruthy();
   });
 });

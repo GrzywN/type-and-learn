@@ -1,16 +1,18 @@
-import styled from '@emotion/styled';
+import { BrowserRouter } from 'react-router-dom';
 
-import NxWelcome from './nx-welcome';
-
-const StyledApp = styled.div`
-  // Your style here
-`;
+import { AppRoutes } from './app-routes';
+import { DefaultLayout } from './layouts/default-layout/default-layout';
+import { ThemeProvider } from './shared/theme/theme-provider';
 
 export function App() {
   return (
-    <StyledApp>
-      <NxWelcome title="type-and-learn" />
-    </StyledApp>
+    <ThemeProvider>
+      <BrowserRouter>
+        <DefaultLayout>
+          <AppRoutes />
+        </DefaultLayout>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
