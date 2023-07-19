@@ -2,12 +2,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { z } from 'zod';
 
 import { AuthForm } from '../../../../shared/ui/organisms/auth-form/auth-form';
 import { useAuth, useRedirectWhenLoggedIn } from '../../../../shared/utils/auth';
 import { routes } from '../../../../shared/utils/routes';
-import { LoginSchema } from '../../models/login.model';
+import { LoginSchema, loginSchema } from '../../models/login.model';
 
 export function Login() {
   useRedirectWhenLoggedIn();
@@ -16,8 +15,8 @@ export function Login() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
-  const { register, handleSubmit } = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
+  const { register, handleSubmit } = useForm<LoginSchema>({
+    resolver: zodResolver(loginSchema),
   });
 
   useEffect(() => {
@@ -26,7 +25,7 @@ export function Login() {
     }
   }, [user, navigate]);
 
-  const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
+  const onSubmit = async (data: LoginSchema) => {
     setIsLoading(true);
     await auth.login(data.email, data.password);
     setIsLoading(false);

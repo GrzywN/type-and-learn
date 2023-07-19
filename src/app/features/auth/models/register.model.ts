@@ -9,7 +9,7 @@ const atLeastOneLowercase = createRegExp(oneOrMore(letter.lowercase));
 const atLeastOneUppercase = createRegExp(oneOrMore(letter.uppercase));
 const atLeastOneNumber = createRegExp(oneOrMore(digit));
 
-export const RegisterSchema = z.object({
+export const registerSchema = z.object({
   username: z.string().trim().min(3, { message: USERNAME_VALIDATION_MESSAGE }),
   email: z.string().trim().email().toLowerCase(),
   password: z
@@ -19,3 +19,5 @@ export const RegisterSchema = z.object({
     .regex(atLeastOneUppercase, { message: PASSWORD_VALIDATION_MESSAGE })
     .regex(atLeastOneNumber, { message: PASSWORD_VALIDATION_MESSAGE }),
 });
+
+export type RegisterSchema = z.infer<typeof registerSchema>;

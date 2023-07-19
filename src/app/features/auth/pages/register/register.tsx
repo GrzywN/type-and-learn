@@ -2,12 +2,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import type { z } from 'zod';
 
 import { AuthForm } from '../../../../shared/ui/organisms/auth-form/auth-form';
 import { useAuth, useRedirectWhenLoggedIn } from '../../../../shared/utils/auth';
 import { routes } from '../../../../shared/utils/routes';
-import { RegisterSchema } from '../../models/register.model';
+import { RegisterSchema, registerSchema } from '../../models/register.model';
 
 export function Register() {
   useRedirectWhenLoggedIn();
@@ -16,11 +15,11 @@ export function Register() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
-  const { register, handleSubmit } = useForm<z.infer<typeof RegisterSchema>>({
-    resolver: zodResolver(RegisterSchema),
+  const { register, handleSubmit } = useForm<RegisterSchema>({
+    resolver: zodResolver(registerSchema),
   });
 
-  const onSubmit = async (data: z.infer<typeof RegisterSchema>) => {
+  const onSubmit = async (data: RegisterSchema) => {
     setIsLoading(true);
     await auth.register(data.email, data.password, data.username);
     setIsLoading(false);
