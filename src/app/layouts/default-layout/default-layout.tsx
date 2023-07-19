@@ -1,11 +1,8 @@
 import { AppShell } from '@mantine/core';
-import {
-  IconBulb,
-  IconCheckbox,
-  IconSettings,
-  IconUser,
-} from '@tabler/icons-react';
+import { IconBulb, IconCheckbox, IconSettings, IconUser } from '@tabler/icons-react';
+import { useNavigate } from 'react-router-dom';
 
+import { useAuth } from '../../shared/utils/auth';
 import { routes } from '../../shared/utils/routes';
 import { MyNavbar } from './components/my-navbar/my-navbar';
 
@@ -14,26 +11,31 @@ export interface DefaultLayoutProps {
 }
 
 const links = [
-  { icon: IconBulb, label: 'Graj i ucz się', path: routes.home.path },
-  { icon: IconCheckbox, label: 'Twoje fiszki', path: routes.flashcards.path },
-  { icon: IconUser, label: 'Fiszki społeczności', path: routes.community.path },
-  { icon: IconSettings, label: 'Ustawienia', path: routes.settings.path },
+  { icon: IconBulb, label: 'Play and learn', path: routes.home.path },
+  { icon: IconCheckbox, label: 'Your flashcards', path: routes.flashcards.path },
+  { icon: IconUser, label: 'Community', path: routes.community.path },
+  { icon: IconSettings, label: 'Settings', path: routes.settings.path },
 ];
 
 const flashcards = [
-  { id: '1', emoji: '👍', label: 'Angielski Dział 1' },
-  { id: '2', emoji: '🚚', label: 'Jakieś bzdury' },
-  { id: '3', emoji: '💸', label: 'Żarty' },
-  { id: '4', emoji: '💰', label: 'Hiszpański' },
+  { id: '1', emoji: '👍', label: 'English' },
+  { id: '2', emoji: '💸', label: 'Daddy jokes' },
 ];
 
 export function DefaultLayout(props: DefaultLayoutProps) {
   const { children } = props;
+  const { auth } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    auth.logout();
+    navigate(routes.login.path);
+  };
 
   return (
     <AppShell
       padding="md"
-      navbar={<MyNavbar links={links} flashcards={flashcards} />}
+      navbar={<MyNavbar links={links} flashcards={flashcards} onLogout={handleLogout} />}
     >
       {children}
     </AppShell>

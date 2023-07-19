@@ -1,7 +1,11 @@
 import { render } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
+import { MockAuthAdapter } from '../../../environments/auth/mock-auth-adapter';
+import { AuthProvider } from '../../shared/utils/auth';
 import { DefaultLayout } from './default-layout';
+
+const auth = new MockAuthAdapter();
 
 describe('DefaultLayout', () => {
   beforeAll(() => {
@@ -22,9 +26,11 @@ describe('DefaultLayout', () => {
 
   it('should render successfully', () => {
     const { baseElement } = render(
-      <BrowserRouter>
-        <DefaultLayout>Children</DefaultLayout>
-      </BrowserRouter>
+      <MemoryRouter>
+        <AuthProvider auth={auth}>
+          <DefaultLayout>Children</DefaultLayout>
+        </AuthProvider>
+      </MemoryRouter>
     );
     expect(baseElement).toBeTruthy();
   });

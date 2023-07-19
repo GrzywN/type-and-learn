@@ -1,17 +1,20 @@
 import { BrowserRouter } from 'react-router-dom';
 
+import { PocketbaseAuthAdapter } from '../environments/auth/pocketbase-auth-adapter';
 import { AppRoutes } from './app-routes';
-import { DefaultLayout } from './layouts/default-layout/default-layout';
 import { ThemeProvider } from './shared/theme/theme-provider';
+import { AuthProvider } from './shared/utils/auth';
+
+const auth = new PocketbaseAuthAdapter();
 
 export function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter>
-        <DefaultLayout>
+      <AuthProvider auth={auth}>
+        <BrowserRouter>
           <AppRoutes />
-        </DefaultLayout>
-      </BrowserRouter>
+        </BrowserRouter>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

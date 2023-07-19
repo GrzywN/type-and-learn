@@ -1,12 +1,9 @@
-import {
-  IconBulb,
-  IconCheckbox,
-  IconSettings,
-  IconUser,
-} from '@tabler/icons-react';
+import { IconBulb, IconCheckbox, IconSettings, IconUser } from '@tabler/icons-react';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
+import { MockAuthAdapter } from '../../../../../environments/auth/mock-auth-adapter';
+import { AuthProvider } from '../../../../shared/utils/auth';
 import { routes } from '../../../../shared/utils/routes';
 import { MyNavbar } from './my-navbar';
 
@@ -17,7 +14,9 @@ const links = [
   { icon: IconSettings, label: 'Ustawienia', path: routes.settings.path },
 ];
 
-const flashcards = [{ id: '1', emoji: '👍', label: 'Angielski Dział 1' }];
+const flashcards = [{ id: '1', emoji: '👍', label: 'English' }];
+
+const auth = new MockAuthAdapter();
 
 describe('MyNavbar', () => {
   beforeAll(() => {
@@ -39,7 +38,9 @@ describe('MyNavbar', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
       <MemoryRouter>
-        <MyNavbar links={links} flashcards={flashcards} />
+        <AuthProvider auth={auth}>
+          <MyNavbar links={links} flashcards={flashcards} onLogout={() => null} />
+        </AuthProvider>
       </MemoryRouter>
     );
     expect(baseElement).toBeTruthy();

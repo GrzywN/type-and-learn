@@ -1,4 +1,4 @@
-import { createStyles, rem } from '@mantine/core';
+import { createStyles, getStylesRef, rem } from '@mantine/core';
 
 export const useMyNavbarStyles = createStyles((theme) => ({
   navbar: {
@@ -12,23 +12,35 @@ export const useMyNavbarStyles = createStyles((theme) => ({
 
     '&:not(:last-of-type)': {
       borderBottom: `${rem(1)} solid ${
-        theme.colorScheme === 'dark'
-          ? theme.colors.dark[4]
-          : theme.colors.gray[3]
+        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
       }`,
+    },
+  },
+
+  link: {
+    ...theme.fn.focusStyles(),
+    display: 'flex',
+    alignItems: 'center',
+    textDecoration: 'none',
+    fontSize: theme.fontSizes.sm,
+    color: theme.white,
+    padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
+    borderRadius: theme.radius.sm,
+    fontWeight: 500,
+
+    '&:hover': {
+      backgroundColor: theme.fn.lighten(
+        theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background ?? 'white',
+        0.1
+      ),
     },
   },
 
   searchCode: {
     fontWeight: 700,
     fontSize: rem(10),
-    backgroundColor:
-      theme.colorScheme === 'dark'
-        ? theme.colors.dark[7]
-        : theme.colors.gray[0],
-    border: `${rem(1)} solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[2]
-    }`,
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0],
+    border: `${rem(1)} solid ${theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[2]}`,
   },
 
   mainLinks: {
@@ -45,16 +57,10 @@ export const useMyNavbarStyles = createStyles((theme) => ({
     padding: `${rem(8)} ${theme.spacing.xs}`,
     borderRadius: theme.radius.sm,
     fontWeight: 500,
-    color:
-      theme.colorScheme === 'dark'
-        ? theme.colors.dark[0]
-        : theme.colors.gray[7],
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
 
     '&:hover': {
-      backgroundColor:
-        theme.colorScheme === 'dark'
-          ? theme.colors.dark[6]
-          : theme.colors.gray[0],
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
       color: theme.colorScheme === 'dark' ? theme.white : theme.black,
     },
   },
@@ -67,10 +73,7 @@ export const useMyNavbarStyles = createStyles((theme) => ({
 
   mainLinkIcon: {
     marginRight: theme.spacing.sm,
-    color:
-      theme.colorScheme === 'dark'
-        ? theme.colors.dark[2]
-        : theme.colors.gray[6],
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[6],
   },
 
   mainLinkBadge: {
@@ -98,20 +101,21 @@ export const useMyNavbarStyles = createStyles((theme) => ({
     textDecoration: 'none',
     borderRadius: theme.radius.sm,
     fontSize: theme.fontSizes.xs,
-    color:
-      theme.colorScheme === 'dark'
-        ? theme.colors.dark[0]
-        : theme.colors.gray[7],
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
     lineHeight: 1,
     fontWeight: 500,
 
     '&:hover': {
-      backgroundColor:
-        theme.colorScheme === 'dark'
-          ? theme.colors.dark[6]
-          : theme.colors.gray[0],
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
       color: theme.colorScheme === 'dark' ? theme.white : theme.black,
     },
+  },
+
+  linkIcon: {
+    ref: getStylesRef('icon'),
+    color: theme.white,
+    opacity: 0.75,
+    marginRight: theme.spacing.sm,
   },
 }));
 
