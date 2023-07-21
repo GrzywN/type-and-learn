@@ -2,8 +2,8 @@ import { ActionIcon, Group, Navbar, Text, TextInput, Tooltip, UnstyledButton, re
 import { IconLogout, IconPlus, IconSearch, IconSelector, TablerIconsProps } from '@tabler/icons-react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { useAuth } from '../../../../shared/auth';
 import { UserButton } from '../../../../shared/ui/molecules/user-button/user-button';
-import { useAuth } from '../../../../shared/utils/auth';
 import { routes } from '../../../../shared/utils/routes';
 import { useMyNavbarStyles } from './my-navbar.styles';
 

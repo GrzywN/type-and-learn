@@ -1,6 +1,6 @@
 import Pocketbase from 'pocketbase';
 
-import type { AuthAdapter, User } from '../../app/shared/utils/auth';
+import type { AuthAdapter, User } from '../types';
 
 export class PocketbaseAuthAdapter implements AuthAdapter {
   private pocketbase: Pocketbase;

@@ -1,8 +1,7 @@
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { MockAuthAdapter } from '../../../../../environments/auth/mock-auth-adapter';
-import { AuthProvider } from '../../../../shared/utils/auth';
+import { AuthProvider, MockAuthAdapter } from '../../../../shared/auth';
 import Login from './login';
 
 const auth = new MockAuthAdapter();

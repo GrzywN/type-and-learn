@@ -8,7 +8,7 @@ import { Settings } from './features/settings/settings';
 import { TypingPractice } from './features/typing-practice/typing-practice';
 import { YourFlashcards } from './features/your-flashcards/your-flashcards';
 import { DefaultLayout } from './layouts/default-layout/default-layout';
-import { useRedirectWhenNotLoggedIn } from './shared/utils/auth';
+import { useRedirectWhenNotLoggedIn } from './shared/auth';
 import { routes } from './shared/utils/routes';
 
 export interface PrivateRouteProps {

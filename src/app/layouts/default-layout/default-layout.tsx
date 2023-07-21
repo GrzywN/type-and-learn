@@ -2,7 +2,7 @@ import { AppShell } from '@mantine/core';
 import { IconBulb, IconCheckbox, IconSettings, IconUser } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAuth } from '../../shared/utils/auth';
+import { useAuth } from '../../shared/auth';
 import { routes } from '../../shared/utils/routes';
 import { MyNavbar } from './components/my-navbar/my-navbar';
 

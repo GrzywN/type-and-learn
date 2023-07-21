@@ -1,4 +1,4 @@
-import type { AuthAdapter, User } from '../../app/shared/utils/auth';
+import type { AuthAdapter, User } from '../types';
 
 export class MockAuthAdapter implements AuthAdapter {
   async login(email: string, password: string): Promise<User | null> {
