@@ -18,7 +18,7 @@ export class PocketbaseAuthAdapter implements AuthAdapter {
         email,
       };
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error('PocketbaseAuthAdapter: Login failed', error);
       return null;
     }
   }
