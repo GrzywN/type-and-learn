@@ -1,22 +1,23 @@
 import { BrowserRouter } from 'react-router-dom';
 
 import { AppRoutes } from './app-routes';
-import { ReactQueryProvider } from './react-query';
 import { AuthProvider, PocketbaseAuthAdapter } from './shared/auth';
+import { HttpProvider, PocketbaseHttpAdapter } from './shared/http';
 import { ThemeProvider } from './shared/theme/theme-provider';
 
+const http = new PocketbaseHttpAdapter();
 const auth = new PocketbaseAuthAdapter();
 
 export function App() {
   return (
     <ThemeProvider>
-      <ReactQueryProvider>
+      <HttpProvider http={http}>
         <AuthProvider auth={auth}>
           <BrowserRouter>
             <AppRoutes />
           </BrowserRouter>
         </AuthProvider>
-      </ReactQueryProvider>
+      </HttpProvider>
     </ThemeProvider>
   );
 }

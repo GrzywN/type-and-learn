@@ -1,17 +1,27 @@
-import styled from '@emotion/styled';
+import { Grid } from '@mantine/core';
 
-/* eslint-disable-next-line */
-export interface YourFlashcardsProps {}
+import { useGetUserCollections } from '../../shared/http';
+import { CardGradient } from '../../shared/ui/molecules/card-gradient/card-gradient';
 
-const StyledYourFlashcards = styled.div`
-  color: pink;
-`;
+export function YourFlashcards() {
+  const { isLoading, isError, data } = useGetUserCollections();
 
-export function YourFlashcards(props: YourFlashcardsProps) {
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (isError) {
+    return <p>Error</p>;
+  }
+
   return (
-    <StyledYourFlashcards>
-      <h1>Welcome to YourFlashcards!</h1>
-    </StyledYourFlashcards>
+    <Grid>
+      {data.map((collection) => (
+        <Grid.Col span={3} key={collection.id}>
+          <CardGradient title={collection.name} description={collection.description} />
+        </Grid.Col>
+      ))}
+    </Grid>
   );
 }
 

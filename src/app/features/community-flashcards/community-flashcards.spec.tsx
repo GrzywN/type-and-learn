@@ -1,10 +1,17 @@
 import { render } from '@testing-library/react';
 
-import CommunityFlashcards from './community-flashcards';
+import { HttpProvider, MockHttpAdapter } from '../../shared/http';
+import { CommunityFlashcards } from './community-flashcards';
+
+const http = new MockHttpAdapter();
 
 describe('CommunityFlashcards', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<CommunityFlashcards />);
+    const { baseElement } = render(
+      <HttpProvider http={http}>
+        <CommunityFlashcards />
+      </HttpProvider>
+    );
     expect(baseElement).toBeTruthy();
   });
 });
