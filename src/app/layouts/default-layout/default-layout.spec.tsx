@@ -1,9 +1,11 @@
 import { AuthProvider, MockAuthAdapter } from '@auth';
+import { HttpProvider, MockHttpAdapter } from '@http';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { DefaultLayout } from './default-layout';
 
+const http = new MockHttpAdapter();
 const auth = new MockAuthAdapter();
 
 describe('DefaultLayout', () => {
@@ -26,9 +28,11 @@ describe('DefaultLayout', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
       <MemoryRouter>
-        <AuthProvider auth={auth}>
-          <DefaultLayout>Children</DefaultLayout>
-        </AuthProvider>
+        <HttpProvider http={http}>
+          <AuthProvider auth={auth}>
+            <DefaultLayout>Children</DefaultLayout>
+          </AuthProvider>
+        </HttpProvider>
       </MemoryRouter>
     );
     expect(baseElement).toBeTruthy();

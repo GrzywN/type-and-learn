@@ -17,11 +17,6 @@ const links = [
   { icon: IconSettings, label: 'Settings', path: routes.settings.path },
 ];
 
-const flashcards = [
-  { id: '1', emoji: '👍', label: 'English' },
-  { id: '2', emoji: '💸', label: 'Daddy jokes' },
-];
-
 export function DefaultLayout(props: DefaultLayoutProps) {
   const { children } = props;
   const { auth } = useAuth();
@@ -33,10 +28,7 @@ export function DefaultLayout(props: DefaultLayoutProps) {
   };
 
   return (
-    <AppShell
-      padding="md"
-      navbar={<MyNavbar links={links} flashcards={flashcards} onLogout={handleLogout} />}
-    >
+    <AppShell padding="md" navbar={<MyNavbar links={links} onLogout={handleLogout} />}>
       {children}
     </AppShell>
   );

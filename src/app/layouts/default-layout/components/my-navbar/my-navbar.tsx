@@ -1,5 +1,6 @@
 import { useAuth } from '@auth';
-import { ActionIcon, Group, Navbar, Text, TextInput, Tooltip, UnstyledButton, rem } from '@mantine/core';
+import { useGetUserCollections } from '@http';
+import { ActionIcon, Group, Loader, Navbar, Text, TextInput, Tooltip, UnstyledButton } from '@mantine/core';
 import { IconLogout, IconPlus, IconSearch, IconSelector, TablerIconsProps } from '@tabler/icons-react';
 import { UserButton } from '@ui/molecules/user-button/user-button';
 import { routes } from '@utils';
@@ -9,15 +10,15 @@ import { useMyNavbarStyles } from './my-navbar.styles';
 
 export interface MyNavbarProps {
   links: { icon: React.FC<TablerIconsProps>; label: string; path: string }[];
-  flashcards: { id: string; emoji: string; label: string }[];
   onLogout: () => void;
 }
 
 export function MyNavbar(props: MyNavbarProps) {
-  const { links, flashcards, onLogout } = props;
+  const { links, onLogout } = props;
   const { classes } = useMyNavbarStyles();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { isLoading, isError, data: userCollections } = useGetUserCollections();
 
   const mainLinks = links.map((link) => (
     <UnstyledButton key={link.label} className={classes.mainLink} onClick={() => navigate(link.path)}>
@@ -28,9 +29,9 @@ export function MyNavbar(props: MyNavbarProps) {
     </UnstyledButton>
   ));
 
-  const flashcardLinks = flashcards.map((collection) => (
-    <Link to={routes.playOne.url(collection.id)} key={collection.label} className={classes.collectionLink}>
-      <span style={{ marginRight: rem(9), fontSize: rem(16) }}>{collection.emoji}</span> {collection.label}
+  const flashcardLinks = userCollections?.map((collection) => (
+    <Link to={routes.playOne.url(collection.id)} key={collection.id} className={classes.collectionLink}>
+      {collection.name}
     </Link>
   ));
 
@@ -65,7 +66,9 @@ export function MyNavbar(props: MyNavbarProps) {
             </ActionIcon>
           </Tooltip>
         </Group>
-        <div className={classes.collections}>{flashcardLinks}</div>
+        <div className={classes.collections}>
+          {isLoading ? <Loader /> : isError ? 'An error occurred' : flashcardLinks}
+        </div>
       </Navbar.Section>
       <Navbar.Section>
         <a

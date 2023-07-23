@@ -1,4 +1,5 @@
 import { AuthProvider, MockAuthAdapter } from '@auth';
+import { HttpProvider, MockHttpAdapter } from '@http';
 import { IconBulb, IconCheckbox, IconSettings, IconUser } from '@tabler/icons-react';
 import { render } from '@testing-library/react';
 import { routes } from '@utils';
@@ -13,8 +14,7 @@ const links = [
   { icon: IconSettings, label: 'Ustawienia', path: routes.settings.path },
 ];
 
-const flashcards = [{ id: '1', emoji: '👍', label: 'English' }];
-
+const http = new MockHttpAdapter();
 const auth = new MockAuthAdapter();
 
 describe('MyNavbar', () => {
@@ -37,9 +37,11 @@ describe('MyNavbar', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
       <MemoryRouter>
-        <AuthProvider auth={auth}>
-          <MyNavbar links={links} flashcards={flashcards} onLogout={() => null} />
-        </AuthProvider>
+        <HttpProvider http={http}>
+          <AuthProvider auth={auth}>
+            <MyNavbar links={links} onLogout={() => null} />
+          </AuthProvider>
+        </HttpProvider>
       </MemoryRouter>
     );
     expect(baseElement).toBeTruthy();
