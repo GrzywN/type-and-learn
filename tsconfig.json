@@ -13,7 +13,17 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {},
+    "paths": {
+      "@assets": ["./src/app/shared/assets"],
+      "@auth": ["./src/app/shared/auth"],
+      "@features/*": ["./src/app/features/*"],
+      "@http": ["./src/app/shared/http"],
+      "@layouts/*": ["./src/app/layouts/*"],
+      "@theme": ["./src/app/shared/theme"],
+      "@type-and-learn/src/app/shared/ui": ["src/app/shared/ui/src/index.ts"],
+      "@ui/*": ["./src/app/shared/ui/*"],
+      "@utils": ["./src/app/shared/utils"]
+    },
     "jsx": "react-jsx",
     "allowJs": false,
     "esModuleInterop": false,

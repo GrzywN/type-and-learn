@@ -1,7 +1,7 @@
+import { routes } from '@utils';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { routes } from '../../utils/routes';
 import { useAuth } from './use-auth';
 
 export const useRedirectWhenLoggedIn = () => {

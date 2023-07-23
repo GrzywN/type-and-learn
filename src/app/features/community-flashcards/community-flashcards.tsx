@@ -1,7 +1,6 @@
+import { useGetCommunityCollections } from '@http';
 import { Grid } from '@mantine/core';
-
-import { useGetCommunityCollections } from '../../shared/http';
-import { CardGradient } from '../../shared/ui/molecules/card-gradient/card-gradient';
+import { CardGradient } from '@ui/molecules/card-gradient/card-gradient';
 
 export function CommunityFlashcards() {
   const { isLoading, isError, data } = useGetCommunityCollections();

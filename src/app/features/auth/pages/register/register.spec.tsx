@@ -1,7 +1,7 @@
+import { AuthProvider, MockAuthAdapter } from '@auth';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { AuthProvider, MockAuthAdapter } from '../../../../shared/auth';
 import Register from './register';
 
 const auth = new MockAuthAdapter();

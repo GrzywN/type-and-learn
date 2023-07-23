@@ -1,11 +1,11 @@
+import { useAuth, useRedirectWhenLoggedIn } from '@auth';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AuthForm } from '@ui/organisms/auth-form/auth-form';
+import { routes } from '@utils';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { useAuth, useRedirectWhenLoggedIn } from '../../../../shared/auth';
-import { AuthForm } from '../../../../shared/ui/organisms/auth-form/auth-form';
-import { routes } from '../../../../shared/utils/routes';
 import { LoginSchema, loginSchema } from '../../models/login.model';
 
 export function Login() {

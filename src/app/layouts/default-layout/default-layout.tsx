@@ -1,9 +1,9 @@
+import { useAuth } from '@auth';
 import { AppShell } from '@mantine/core';
 import { IconBulb, IconCheckbox, IconSettings, IconUser } from '@tabler/icons-react';
+import { routes } from '@utils';
 import { useNavigate } from 'react-router-dom';
 
-import { useAuth } from '../../shared/auth';
-import { routes } from '../../shared/utils/routes';
 import { MyNavbar } from './components/my-navbar/my-navbar';
 
 export interface DefaultLayoutProps {

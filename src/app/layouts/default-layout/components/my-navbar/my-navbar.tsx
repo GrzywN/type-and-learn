@@ -1,10 +1,10 @@
+import { useAuth } from '@auth';
 import { ActionIcon, Group, Navbar, Text, TextInput, Tooltip, UnstyledButton, rem } from '@mantine/core';
 import { IconLogout, IconPlus, IconSearch, IconSelector, TablerIconsProps } from '@tabler/icons-react';
+import { UserButton } from '@ui/molecules/user-button/user-button';
+import { routes } from '@utils';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useAuth } from '../../../../shared/auth';
-import { UserButton } from '../../../../shared/ui/molecules/user-button/user-button';
-import { routes } from '../../../../shared/utils/routes';
 import { useMyNavbarStyles } from './my-navbar.styles';
 
 export interface MyNavbarProps {

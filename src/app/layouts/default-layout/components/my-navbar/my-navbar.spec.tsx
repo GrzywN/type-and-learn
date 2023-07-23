@@ -1,9 +1,9 @@
+import { AuthProvider, MockAuthAdapter } from '@auth';
 import { IconBulb, IconCheckbox, IconSettings, IconUser } from '@tabler/icons-react';
 import { render } from '@testing-library/react';
+import { routes } from '@utils';
 import { MemoryRouter } from 'react-router-dom';
 
-import { AuthProvider, MockAuthAdapter } from '../../../../shared/auth/index';
-import { routes } from '../../../../shared/utils/routes';
 import { MyNavbar } from './my-navbar';
 
 const links = [

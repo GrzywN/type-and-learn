@@ -1,7 +1,6 @@
+import { useGetUserCollections } from '@http';
 import { Grid } from '@mantine/core';
-
-import { useGetUserCollections } from '../../shared/http';
-import { CardGradient } from '../../shared/ui/molecules/card-gradient/card-gradient';
+import { CardGradient } from '@ui/molecules/card-gradient/card-gradient';
 
 export function YourFlashcards() {
   const { isLoading, isError, data } = useGetUserCollections();

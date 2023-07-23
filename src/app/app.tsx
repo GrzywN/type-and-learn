@@ -1,9 +1,9 @@
+import { AuthProvider, PocketbaseAuthAdapter } from '@auth';
+import { HttpProvider, PocketbaseHttpAdapter } from '@http';
+import { ThemeProvider } from '@theme';
 import { BrowserRouter } from 'react-router-dom';
 
 import { AppRoutes } from './app-routes';
-import { AuthProvider, PocketbaseAuthAdapter } from './shared/auth';
-import { HttpProvider, PocketbaseHttpAdapter } from './shared/http';
-import { ThemeProvider } from './shared/theme/theme-provider';
 
 const http = new PocketbaseHttpAdapter();
 const auth = new PocketbaseAuthAdapter();

@@ -1,6 +1,6 @@
+import { HttpProvider, MockHttpAdapter } from '@http';
 import { render } from '@testing-library/react';
 
-import { HttpProvider, MockHttpAdapter } from '../../shared/http';
 import { YourFlashcards } from './your-flashcards';
 
 const http = new MockHttpAdapter();
