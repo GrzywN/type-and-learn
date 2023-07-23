@@ -12,16 +12,6 @@ const TypingPractice = lazy(() => import('@features/typing-practice/typing-pract
 const YourFlashcards = lazy(() => import('@features/your-flashcards/your-flashcards'));
 const DefaultLayout = lazy(() => import('@layouts/default-layout/default-layout'));
 
-export interface AnyRouteProps {
-  children: React.ReactNode;
-}
-
-export function AnyRoute(props: AnyRouteProps) {
-  const { children } = props;
-
-  return <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>;
-}
-
 export interface PrivateRouteProps {
   children: React.ReactNode;
 }
@@ -31,81 +21,65 @@ export function PrivateRoute(props: PrivateRouteProps) {
 
   useRedirectWhenNotLoggedIn();
 
-  return (
-    <AnyRoute>
-      <DefaultLayout>{children}</DefaultLayout>
-    </AnyRoute>
-  );
+  return <DefaultLayout>{children}</DefaultLayout>;
 }
 
 export function AppRoutes() {
   return (
-    <Routes>
-      <Route
-        path={routes.login.path}
-        element={
-          <AnyRoute>
-            <Login />
-          </AnyRoute>
-        }
-      />
-      <Route
-        path={routes.register.path}
-        element={
-          <AnyRoute>
-            <Register />
-          </AnyRoute>
-        }
-      />
-      <Route
-        path={routes.home.path}
-        element={
-          <PrivateRoute>
-            <Home />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path={routes.playOne.path}
-        element={
-          <PrivateRoute>
-            <TypingPractice />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path={routes.playAll.path}
-        element={
-          <PrivateRoute>
-            <TypingPractice />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path={routes.flashcards.path}
-        element={
-          <PrivateRoute>
-            <YourFlashcards />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path={routes.community.path}
-        element={
-          <PrivateRoute>
-            <CommunityFlashcards />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path={routes.settings.path}
-        element={
-          <PrivateRoute>
-            <Settings />
-          </PrivateRoute>
-        }
-      />
-    </Routes>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path={routes.login.path} element={<Login />} />
+        <Route path={routes.register.path} element={<Register />} />
+        <Route
+          path={routes.home.path}
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={routes.playOne.path}
+          element={
+            <PrivateRoute>
+              <TypingPractice />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={routes.playAll.path}
+          element={
+            <PrivateRoute>
+              <TypingPractice />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={routes.flashcards.path}
+          element={
+            <PrivateRoute>
+              <YourFlashcards />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={routes.community.path}
+          element={
+            <PrivateRoute>
+              <CommunityFlashcards />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={routes.settings.path}
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </Suspense>
   );
 }
 
