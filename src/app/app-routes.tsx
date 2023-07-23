@@ -1,14 +1,26 @@
 import { useRedirectWhenNotLoggedIn } from '@auth';
-import { Login } from '@features/auth/pages/login/login';
-import { Register } from '@features/auth/pages/register/register';
-import { CommunityFlashcards } from '@features/community-flashcards/community-flashcards';
-import { Home } from '@features/home/home';
-import { Settings } from '@features/settings/settings';
-import { TypingPractice } from '@features/typing-practice/typing-practice';
-import { YourFlashcards } from '@features/your-flashcards/your-flashcards';
-import { DefaultLayout } from '@layouts/default-layout/default-layout';
 import { routes } from '@utils';
+import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
+
+const Login = lazy(() => import('@features/auth/pages/login/login'));
+const Register = lazy(() => import('@features/auth/pages/register/register'));
+const CommunityFlashcards = lazy(() => import('@features/community-flashcards/community-flashcards'));
+const Settings = lazy(() => import('@features/settings/settings'));
+const Home = lazy(() => import('@features/home/home'));
+const TypingPractice = lazy(() => import('@features/typing-practice/typing-practice'));
+const YourFlashcards = lazy(() => import('@features/your-flashcards/your-flashcards'));
+const DefaultLayout = lazy(() => import('@layouts/default-layout/default-layout'));
+
+export interface AnyRouteProps {
+  children: React.ReactNode;
+}
+
+export function AnyRoute(props: AnyRouteProps) {
+  const { children } = props;
+
+  return <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>;
+}
 
 export interface PrivateRouteProps {
   children: React.ReactNode;
@@ -19,14 +31,32 @@ export function PrivateRoute(props: PrivateRouteProps) {
 
   useRedirectWhenNotLoggedIn();
 
-  return <DefaultLayout>{children}</DefaultLayout>;
+  return (
+    <AnyRoute>
+      <DefaultLayout>{children}</DefaultLayout>
+    </AnyRoute>
+  );
 }
 
 export function AppRoutes() {
   return (
     <Routes>
-      <Route path={routes.login.path} element={<Login />} />
-      <Route path={routes.register.path} element={<Register />} />
+      <Route
+        path={routes.login.path}
+        element={
+          <AnyRoute>
+            <Login />
+          </AnyRoute>
+        }
+      />
+      <Route
+        path={routes.register.path}
+        element={
+          <AnyRoute>
+            <Register />
+          </AnyRoute>
+        }
+      />
       <Route
         path={routes.home.path}
         element={
